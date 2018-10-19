@@ -1,0 +1,19 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6-browsers
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - npm-{{ checksum "package-lock.json" }}
+          - npm
+    - run: npm install
+    - save_cache:
+        key: npm-{{ checksum "package-lock.json" }}
+        paths:
+          - node_modules
+    - run: npm run lint
+    - run: npm run test:unit
