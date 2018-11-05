@@ -1,5 +1,4 @@
 import { assert } from 'chai'
-// @ts-ignore:
 import * as jsonld from 'jsonld'
 import * as axe from 'axe-core'
 import { getDummyData } from './utils'
@@ -36,7 +35,8 @@ describe(`createEarlReport`, () => {
 
   it(`returns valid JSON-LD`, async () => {
     const earlReport = createEarlReport(dummyData)
-    await jsonld.flatten(earlReport)
+    // have to typecast to any, to allow for usage of await, as otherwise the interface expects a callback argument
+    await (jsonld as any).flatten(earlReport)
   })
 
   it(`loses no data when transformed with jsonld`, async () => {
@@ -79,7 +79,8 @@ describe(`createEarlReport`, () => {
       'dqu-page': 'https://dequeuniversity.com/rules/axe/'
     }
 
-    const compact = await jsonld.compact(earlReport, context)
+    // have to typecast to any, to allow for usage of await, as otherwise the interface expects a callback argument
+    const compact = await (jsonld as any).compact(earlReport, context)
     assert.deepEqual(compact, {
       '@context': context,
       '@type': 'sch:WebPage',
@@ -152,10 +153,10 @@ describe(`axeEarlReporter`, () => {
       </main>
     `
     // Run axe
-    const earlResults = await axe.run({
-      // @ts-ignore:
+    const params: any = {
       reporter: axeEarlReporter
-    })
+    }
+    const earlResults: axe.AxeResults | any = await axe.run(params)
     assert.isDefined(earlResults['@context'])
   })
 })

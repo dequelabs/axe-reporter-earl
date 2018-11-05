@@ -2,7 +2,7 @@ import { RawResult } from '../types'
 import * as clone from 'clone'
 import * as axe from 'axe-core'
 
-let _dummyData: RawResult[]
+let _dummyData: RawResult[] | axe.AxeResults
 export async function getDummyData(version = '3.1') {
   if (!_dummyData) {
     document.body.innerHTML = `
@@ -12,16 +12,15 @@ export async function getDummyData(version = '3.1') {
         <p><input type="text"> Failing input field</p>
       </main>
     `
-    axe.configure({
-      // @ts-ignore:
-      reporter: function(raw, _, callback) {
+    const params: any = {
+      reporter: function(raw: any, _: any, callback: Function) {
         callback(JSON.parse(JSON.stringify(raw)))
       }
-    })
-    // @ts-ignore:
+    }
+    axe.configure(params)
     _dummyData = await axe.run()
   }
-  return clone(_dummyData).map((result: RawResult) => {
+  return clone(_dummyData as RawResult[]).map((result: RawResult) => {
     result.helpUrl = result.helpUrl.replace(
       /axe\/([1-9][0-9]*\.[1-9][0-9]*)\//,
       `axe/${version}/`

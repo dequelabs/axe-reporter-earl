@@ -24,22 +24,24 @@ export default function axeResultToEarl(
         })
       }
 
-      const newAsserts = results.map(result => {
-        const match = axeResult.helpUrl.match(
-          /axe\/([1-9][0-9]*\.[1-9][0-9]*)\//
-        )
-        const version = (match && match[1]) || ''
-        return {
-          '@type': 'Assertion',
-          mode: 'earl:automatic',
-          assertedBy: `https://github.com/dequelabs/axe-core/releases/tag/${version}.0`,
-          test: {
-            '@type': 'TestCase',
-            '@id': axeResult.helpUrl
-          },
-          result
-        } as Assertion
-      })
+      const newAsserts = results.map(
+        (result): Assertion => {
+          const match = axeResult.helpUrl.match(
+            /axe\/([1-9][0-9]*\.[1-9][0-9]*)\//
+          )
+          const version = (match && match[1]) || ''
+          return {
+            '@type': 'Assertion',
+            mode: 'earl:automatic',
+            assertedBy: `https://github.com/dequelabs/axe-core/releases/tag/${version}.0`,
+            test: {
+              '@type': 'TestCase',
+              '@id': axeResult.helpUrl
+            },
+            result
+          } as Assertion
+        }
+      )
 
       return asserts.concat(newAsserts)
     },

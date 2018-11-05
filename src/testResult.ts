@@ -22,9 +22,9 @@ export default function testResult(
 }
 
 export function cssToPointer(selector: Selector): string {
-  if (Array.isArray(selector[0])) {
-    return selector[0][0]
+  const item = selector[0]
+  if (Array.isArray(item)) {
+    return item[0]
   }
-  // @ts-ignore:
-  return selector[0]
+  return item
 }
