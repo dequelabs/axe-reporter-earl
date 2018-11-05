@@ -1,7 +1,7 @@
 import testResult, { cssToPointer } from '../testResult'
 import { assert } from 'chai'
 import { getDummyData } from './utils'
-import { RawResult, RawNodeResult } from '../types'
+import { RawResult, RawNodeResult, EarlType } from '../types'
 
 let dummyData: RawResult[]
 beforeEach(async () => {
@@ -41,7 +41,7 @@ test(`returns an array of TestResult objects`, () => {
   eachResult((axeResult, nodeResults) => {
     const results = testResult(axeResult, nodeResults)
     results.forEach(result => {
-      assert.equal(result['@type'], 'TestResult')
+      assert.equal(result['@type'], EarlType.TestResult)
     })
   })
 })

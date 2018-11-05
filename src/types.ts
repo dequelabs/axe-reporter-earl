@@ -1,6 +1,13 @@
+export enum EarlType {
+  WebPage = 'WebPage',
+  Assertion = 'Assertion',
+  TestCase = 'TestCase',
+  TestResult = 'TestResult'
+}
+
 export interface EarlResult {
   '@context': object
-  '@type': 'WebPage'
+  '@type': EarlType.WebPage
   url: string
   assertions: Assertion[]
 }
@@ -12,18 +19,18 @@ type outcome =
   | 'earl:failed'
 
 export interface Assertion {
-  '@type': 'Assertion'
+  '@type': EarlType.Assertion
   mode: 'earl:automatic'
   assertedBy: string
   test: {
-    '@type': 'TestCase'
+    '@type': EarlType.TestCase
     '@id': string
   }
   result: TestResult
 }
 
 export interface TestResult {
-  '@type': 'TestResult'
+  '@type': EarlType.TestResult
   outcome: string
   pointer?: string
   info?: string

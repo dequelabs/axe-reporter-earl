@@ -1,4 +1,4 @@
-import { RawResult, Assertion, TestResult } from './types'
+import { RawResult, Assertion, TestResult, EarlType } from './types'
 import testResults from './testResult'
 
 export default function axeResultToEarl(
@@ -19,7 +19,7 @@ export default function axeResultToEarl(
 
       if (results.length === 0) {
         results.push({
-          '@type': 'TestResult',
+          '@type': EarlType.TestResult,
           outcome: 'earl:inapplicable'
         })
       }
@@ -31,11 +31,11 @@ export default function axeResultToEarl(
           )
           const version = (match && match[1]) || ''
           return {
-            '@type': 'Assertion',
+            '@type': EarlType.Assertion,
             mode: 'earl:automatic',
             assertedBy: `https://github.com/dequelabs/axe-core/releases/tag/${version}.0`,
             test: {
-              '@type': 'TestCase',
+              '@type': EarlType.TestCase,
               '@id': axeResult.helpUrl
             },
             result

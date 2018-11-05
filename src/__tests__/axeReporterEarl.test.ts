@@ -4,7 +4,7 @@ import * as axe from 'axe-core'
 import { getDummyData } from './utils'
 import axeEarlReporter, { createEarlReport } from '../axeReporterEarl'
 import * as context from '../context.json'
-import { RawResult } from '../types'
+import { RawResult, EarlType } from '../types'
 
 describe(`createEarlReport`, () => {
   let dummyData: RawResult[]
@@ -19,7 +19,7 @@ describe(`createEarlReport`, () => {
 
   it(`returns with "@type": "WebPage"`, async () => {
     const earlReport = createEarlReport(dummyData)
-    assert.equal(earlReport['@type'], 'WebPage')
+    assert.equal(earlReport['@type'], EarlType.WebPage)
   })
 
   it(`returns with "assertions": Array`, () => {

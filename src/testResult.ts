@@ -2,7 +2,8 @@ import {
   RawResult,
   RawNodeResult,
   TestResult,
-  Selector
+  Selector,
+  EarlType
 } from './types'
 
 export default function testResult(
@@ -12,7 +13,7 @@ export default function testResult(
   return outcomes.map(
     ({ node, result }): TestResult => {
       return {
-        '@type': 'TestResult',
+        '@type': EarlType.TestResult,
         info: description,
         outcome: 'earl:' + result,
         pointer: cssToPointer(node.selector)

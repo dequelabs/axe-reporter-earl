@@ -1,4 +1,4 @@
-import { RawResult, EarlResult } from './types'
+import { RawResult, EarlResult, EarlType } from './types'
 import * as context from './context.json'
 import axeResultToAssertion from './axeResultToEarl'
 
@@ -15,7 +15,7 @@ export function createEarlReport(
 ): EarlResult {
   return {
     '@context': context,
-    '@type': 'WebPage',
+    '@type': EarlType.WebPage,
     url: window.location.href,
     assertions: axeResultToAssertion(rawResults)
   }
