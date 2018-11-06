@@ -39,7 +39,7 @@ export default function axeResultToEarl(
               '@id': axeResult.helpUrl
             },
             result
-          } as Assertion
+          }
         }
       )
 
