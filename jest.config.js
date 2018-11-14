@@ -1,6 +1,10 @@
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jsdom',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  transform: {
+    '\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js'
+  },
+  testRegex: '/__tests__/.*\\.(ts|tsx|js)$',
   testPathIgnorePatterns: [
     '/node_modules/',
     '/dist/',

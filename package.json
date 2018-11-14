@@ -5,7 +5,7 @@
   "main": "dist/axeReporterEarl.js",
   "scripts": {
     "start": "jest --watch --env=jsdom",
-    "test": "npm run lint && npm run test:unit",
+    "test": "npm run build && npm run lint && npm run test:unit",
     "test:unit": "jest --collectCoverage",
     "build": "tsc",
     "prepublishOnly": "npm run build",
@@ -25,34 +25,26 @@
   "author": "Wilco Fiers",
   "license": "MPL-2.0",
   "devDependencies": {
-    "@types/chai": "^4.1.6",
     "@types/clone": "^0.1.30",
-    "@types/jest": "^23.3.5",
+    "@types/jest": "^23.3.9",
     "@types/jsonld": "github:types/jsonld",
     "@types/node": "^10.12.0",
+    "@types/puppeteer": "^1.10.0",
     "axe-core": "^3.1.2",
-    "chai": "^4.2.0",
     "clone": "^2.1.2",
     "husky": "^1.0.0",
     "jest": "^23.6.0",
+    "jest-puppeteer": "^3.5.1",
     "jsonld": "^1.1.0",
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
+    "puppeteer": "^1.10.0",
     "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.0.3"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 70,
-    "bracketSpacing": true,
-    "useTabs": false,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
+    "typescript": "^3.1.6"
   },
   "lint-staged": {
     "*.{md,js,json}": [
