@@ -82,11 +82,11 @@ test(`TestResult has 'pointer'`, () => {
 })
 
 describe(`cssToPointer`, () => {
-  it(`returns the first item of an array`, () => {
+  test(`returns the first item of an array`, () => {
     expect(cssToPointer(['foo', 'bar'])).toEqual('foo')
   })
 
-  it(`returns the first item of a nested array`, () => {
+  test(`returns the first item of a nested array`, () => {
     expect(cssToPointer([['foo', 'bar'], 'baz'])).toEqual('foo')
   })
 })

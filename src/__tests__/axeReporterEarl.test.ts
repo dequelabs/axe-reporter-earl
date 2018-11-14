@@ -11,34 +11,34 @@ describe(`createEarlReport`, () => {
     dummyData = await getDummyData()
   })
 
-  it(`returns the @context object`, () => {
+  test(`returns the @context object`, () => {
     const earlReport = createEarlReport(dummyData)
     expect(earlReport['@context']).toEqual(context)
   })
 
-  it(`returns with "@type": "WebPage"`, async () => {
+  test(`returns with "@type": "WebPage"`, async () => {
     const earlReport = createEarlReport(dummyData)
     expect(earlReport['@type']).toEqual(EarlType.WebPage)
   })
 
-  it(`returns with "assertions": Array`, () => {
+  test(`returns with "assertions": Array`, () => {
     const earlReport = createEarlReport(dummyData)
     expect(Array.isArray(earlReport.assertions)).toBe(true)
   })
 
-  it(`returns { url } from window.location.href `, () => {
+  test(`returns { url } from window.location.href `, () => {
     const earlReport = createEarlReport(dummyData)
     expect(window.location.href).toBeDefined()
     expect(earlReport['url']).toEqual(window.location.href)
   })
 
-  it(`returns valid JSON-LD`, async () => {
+  test(`returns valid JSON-LD`, async () => {
     const earlReport = createEarlReport(dummyData)
     // have to typecast to any, to allow for usage of await, as otherwise the interface expects a callback argument
     await (jsonld as any).flatten(earlReport)
   })
 
-  it(`loses no data when transformed with jsonld`, async () => {
+  test(`loses no data when transformed with jsonld`, async () => {
     const earlReport = createEarlReport([
       {
         id: 'foo',
