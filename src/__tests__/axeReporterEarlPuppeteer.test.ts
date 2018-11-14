@@ -1,12 +1,12 @@
-import puppeteer from 'puppeteer'
-// import { Page, Browser } from 'puppeteer'
+import * as puppeteer from 'puppeteer'
+import { Page, Browser } from 'puppeteer'
 import axeEarlReporter from '../axeEarlReporter'
 import * as axe from 'axe-core'
 const axePath = require.resolve('axe-core')
 
 describe(`run axe-core reporter in puppeteer`, () => {
-  let page: any
-  let browser: any
+  let page: Page
+  let browser: Browser
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
