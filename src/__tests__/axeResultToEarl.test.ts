@@ -1,5 +1,4 @@
 import axeResultToEarl from '../axeResultToEarl'
-import { assert } from 'chai'
 import { getDummyData } from './utils'
 import testResult from '../testResult'
 import { RawResult, RawNodeResult } from '../types'
@@ -17,20 +16,18 @@ const outcomeMap = {
 }
 
 test(`returns an array of assertions`, () => {
-  assert.isArray(dummyData)
-  assert.notEqual(dummyData.length, 0)
-
+  expect(Array.isArray(dummyData)).toBe(true)
+  expect(dummyData.length).not.toEqual(0)
   const assertions = axeResultToEarl(dummyData)
-  assert.isArray(assertions)
-  assert.notEqual(assertions.length, 0)
+  expect(Array.isArray(assertions)).toBe(true)
+  expect(assertions.length).not.toEqual(0)
 })
 
 test(`Assertions have {'assertedBy': axeReleaseUrl }`, async () => {
   const dummyData = await getDummyData('20.10')
   const assertions = axeResultToEarl(dummyData)
   assertions.forEach(assertion => {
-    assert.equal(
-      assertion['assertedBy'],
+    expect(assertion['assertedBy']).toEqual(
       'https://github.com/dequelabs/axe-core/releases/tag/20.10.0'
     )
   })
@@ -40,8 +37,8 @@ test(`Assertions have {'test': { '@type': 'TestCase', '@id': helpUrl } }`, () =>
   const helpUrls = dummyData.map(({ helpUrl }) => helpUrl)
   const assertions = axeResultToEarl(dummyData)
   assertions.forEach(assertion => {
-    assert.isObject(assertion['test'])
-    assert.include(helpUrls, assertion['test']['@id'])
+    expect(typeof assertion['test']).toBe('object')
+    expect(helpUrls).toContain(assertion['test']['@id'])
   })
 })
 
@@ -56,17 +53,13 @@ test(`Rules without results get an 'earl:inapplicable' assertion`, () => {
       )
     }
   )
-  assert.notEqual(inapplicableData.length, 0)
+  expect(inapplicableData.length).not.toEqual(0)
   inapplicableData.forEach(ruleData => {
     let ruleAsserts = assertions.filter(assertion => {
       return assertion.test['@id'].includes(`/${ruleData.id}?`)
     })
-    assert.lengthOf(
-      ruleAsserts,
-      1,
-      'One inapplicable assertion per inapplicable rule'
-    )
-    assert.equal(ruleAsserts[0].result.outcome, 'earl:inapplicable')
+    expect(ruleAsserts).toHaveLength(1)
+    expect(ruleAsserts[0].result.outcome).toEqual('earl:inapplicable')
   })
 })
 
@@ -77,9 +70,9 @@ resultTypes.forEach(type =>
 
       dummyData.forEach(ruleData => {
         const rawResult: RawNodeResult[] = (ruleData as any)[type]
-        assert.isDefined(rawResult)
+        expect(rawResult).toBeDefined()
         const outcomeType: string = (outcomeMap as any)[type]
-        assert.isDefined(outcomeType)
+        expect(outcomeType).toBeDefined()
 
         const ruleAsserts = assertions
           .filter(assertion => {
@@ -87,19 +80,11 @@ resultTypes.forEach(type =>
           })
           .filter(({ result }) => result.outcome === outcomeType)
 
-        assert.equal(
-          rawResult.length,
-          ruleAsserts.length,
-          'Expect to see an assert for each result'
-        )
+        expect(rawResult.length).toEqual(ruleAsserts.length)
 
         const expectAssert = testResult(ruleData, rawResult)
         ruleAsserts.forEach(ruleAssert => {
-          assert.deepInclude(
-            expectAssert,
-            ruleAssert.result,
-            'Each result from axe corresponds to an assertion'
-          )
+          expect(expectAssert).toContainEqual(ruleAssert.result)
         })
       })
     })

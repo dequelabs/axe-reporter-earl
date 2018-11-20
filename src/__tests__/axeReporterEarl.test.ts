@@ -1,8 +1,7 @@
-import { assert } from 'chai'
 import * as jsonld from 'jsonld'
 import * as axe from 'axe-core'
 import { getDummyData } from './utils'
-import axeEarlReporter, { createEarlReport } from '../axeReporterEarl'
+import axeEarlReporter, { createEarlReport } from '../axeEarlReporter'
 import * as context from '../context.json'
 import { RawResult, EarlType } from '../types'
 
@@ -12,34 +11,34 @@ describe(`createEarlReport`, () => {
     dummyData = await getDummyData()
   })
 
-  it(`returns the @context object`, () => {
+  test(`returns the @context object`, () => {
     const earlReport = createEarlReport(dummyData)
-    assert.deepEqual(earlReport['@context'], context)
+    expect(earlReport['@context']).toEqual(context)
   })
 
-  it(`returns with "@type": "WebPage"`, async () => {
+  test(`returns with "@type": "WebPage"`, async () => {
     const earlReport = createEarlReport(dummyData)
-    assert.equal(earlReport['@type'], EarlType.WebPage)
+    expect(earlReport['@type']).toEqual(EarlType.WebPage)
   })
 
-  it(`returns with "assertions": Array`, () => {
+  test(`returns with "assertions": Array`, () => {
     const earlReport = createEarlReport(dummyData)
-    assert.isArray(earlReport.assertions)
+    expect(Array.isArray(earlReport.assertions)).toBe(true)
   })
 
-  it(`returns { url } from window.location.href `, () => {
+  test(`returns { url } from window.location.href `, () => {
     const earlReport = createEarlReport(dummyData)
-    assert.isDefined(window.location.href)
-    assert.equal(earlReport['url'], window.location.href)
+    expect(window.location.href).toBeDefined()
+    expect(earlReport['url']).toEqual(window.location.href)
   })
 
-  it(`returns valid JSON-LD`, async () => {
+  test(`returns valid JSON-LD`, async () => {
     const earlReport = createEarlReport(dummyData)
     // have to typecast to any, to allow for usage of await, as otherwise the interface expects a callback argument
     await (jsonld as any).flatten(earlReport)
   })
 
-  it(`loses no data when transformed with jsonld`, async () => {
+  test(`loses no data when transformed with jsonld`, async () => {
     const earlReport = createEarlReport([
       {
         id: 'foo',
@@ -81,7 +80,7 @@ describe(`createEarlReport`, () => {
 
     // have to typecast to any, to allow for usage of await, as otherwise the interface expects a callback argument
     const compact = await (jsonld as any).compact(earlReport, context)
-    assert.deepEqual(compact, {
+    expect(compact).toEqual({
       '@context': context,
       '@type': 'sch:WebPage',
       'dct:source': window.location.href,
@@ -157,6 +156,6 @@ describe(`axeEarlReporter`, () => {
       reporter: axeEarlReporter
     }
     const earlResults: axe.AxeResults | any = await axe.run(params)
-    assert.isDefined(earlResults['@context'])
+    expect(earlResults['@context']).toBeDefined()
   })
 })

@@ -1,5 +1,4 @@
 import testResult, { cssToPointer } from '../testResult'
-import { assert } from 'chai'
 import { getDummyData } from './utils'
 import { RawResult, RawNodeResult, EarlType } from '../types'
 
@@ -41,34 +40,34 @@ test(`returns an array of TestResult objects`, () => {
   eachResult((axeResult, nodeResults) => {
     const results = testResult(axeResult, nodeResults)
     results.forEach(result => {
-      assert.equal(result['@type'], EarlType.TestResult)
+      expect(result['@type']).toEqual(EarlType.TestResult)
     })
   })
 })
 
 test(`TestResult has 'outcome'`, () => {
   eachResult((axeResult, nodeResults, type) => {
-    assert.isDefined(outcomeMap[type])
+    expect(outcomeMap[type]).toBeDefined()
     const results = testResult(axeResult, nodeResults)
     results.forEach(result => {
-      assert.equal(result['outcome'], outcomeMap[type])
+      expect(result['outcome']).toEqual(outcomeMap[type])
     })
   })
 })
 
 test(`TestResult has 'info'`, () => {
   eachResult((axeResult, nodeResults) => {
-    assert.isDefined(axeResult.description)
+    expect(axeResult.description).toBeDefined()
     const results = testResult(axeResult, nodeResults)
     results.forEach(result => {
-      assert.equal(result['info'], axeResult.description)
+      expect(result['info']).toEqual(axeResult.description)
     })
   })
 })
 
 test(`TestResult has 'pointer'`, () => {
   eachResult((axeResult, nodeResults) => {
-    assert.isDefined(axeResult.description)
+    expect(axeResult.description).toBeDefined()
     const results = testResult(axeResult, nodeResults)
     const pointers = nodeResults.map(
       ({ node }) =>
@@ -77,21 +76,17 @@ test(`TestResult has 'pointer'`, () => {
           : node.selector[0]
     )
     results.forEach(result => {
-      assert.include(
-        pointers,
-        result['pointer'],
-        'There is a pointer for each result'
-      )
+      expect(pointers).toContain(result['pointer'])
     })
   })
 })
 
 describe(`cssToPointer`, () => {
-  it(`returns the first item of an array`, () => {
-    assert.equal(cssToPointer(['foo', 'bar']), 'foo')
+  test(`returns the first item of an array`, () => {
+    expect(cssToPointer(['foo', 'bar'])).toEqual('foo')
   })
 
-  it(`returns the first item of a nested array`, () => {
-    assert.equal(cssToPointer([['foo', 'bar'], 'baz']), 'foo')
+  test(`returns the first item of a nested array`, () => {
+    expect(cssToPointer([['foo', 'bar'], 'baz'])).toEqual('foo')
   })
 })
