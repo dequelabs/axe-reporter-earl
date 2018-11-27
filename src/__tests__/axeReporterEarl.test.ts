@@ -1,7 +1,7 @@
 import * as jsonld from 'jsonld'
 import * as axe from 'axe-core'
 import { getDummyData } from './utils'
-import axeEarlReporter, { createEarlReport } from '../axeEarlReporter'
+import axeReporterEarl, { createEarlReport } from '../axeReporterEarl'
 import * as context from '../context.json'
 import { RawResult, EarlType } from '../types'
 
@@ -142,7 +142,7 @@ describe(`createEarlReport`, () => {
   })
 })
 
-describe(`axeEarlReporter`, () => {
+describe(`axeReporterEarl`, () => {
   test(`runs with axe-core`, async () => {
     document.body.innerHTML = `
       <h1>My page </h1>
@@ -153,7 +153,7 @@ describe(`axeEarlReporter`, () => {
     `
     // Run axe
     const params: any = {
-      reporter: axeEarlReporter
+      reporter: axeReporterEarl
     }
     const earlResults: axe.AxeResults | any = await axe.run(params)
     expect(earlResults['@context']).toBeDefined()
