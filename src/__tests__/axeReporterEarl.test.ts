@@ -1,7 +1,7 @@
 import * as jsonld from 'jsonld'
 import * as axe from 'axe-core'
 import { getDummyData } from './utils'
-import axeEarlReporter, { createEarlReport } from '../axeEarlReporter'
+import axeReporterEarl, { createEarlReport } from '../axeReporterEarl'
 import * as context from '../context.json'
 import { RawResult, EarlType } from '../types'
 
@@ -88,7 +88,20 @@ describe(`createEarlReport`, () => {
         'earl:subject': [
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -101,7 +114,20 @@ describe(`createEarlReport`, () => {
           },
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -120,7 +146,20 @@ describe(`createEarlReport`, () => {
           },
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -142,7 +181,7 @@ describe(`createEarlReport`, () => {
   })
 })
 
-describe(`axeEarlReporter`, () => {
+describe(`axeReporterEarl`, () => {
   test(`runs with axe-core`, async () => {
     document.body.innerHTML = `
       <h1>My page </h1>
@@ -153,7 +192,7 @@ describe(`axeEarlReporter`, () => {
     `
     // Run axe
     const params: any = {
-      reporter: axeEarlReporter
+      reporter: axeReporterEarl
     }
     const earlResults: axe.AxeResults | any = await axe.run(params)
     expect(earlResults['@context']).toBeDefined()

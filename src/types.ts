@@ -21,7 +21,7 @@ type outcome =
 export interface Assertion {
   '@type': EarlType.Assertion
   mode: 'earl:automatic'
-  assertedBy: string
+  assertedBy: Object
   test: {
     '@type': EarlType.TestCase
     '@id': string

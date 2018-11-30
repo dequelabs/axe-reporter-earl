@@ -2,7 +2,7 @@ import { RawResult, EarlResult, EarlType } from './types'
 import * as context from './context.json'
 import axeResultToAssertion from './axeResultToEarl'
 
-export default function axeEarlReporter(
+export default function axeReporterEarl(
   rawResults: RawResult[],
   {},
   callback: Function
@@ -11,12 +11,14 @@ export default function axeEarlReporter(
 }
 
 export function createEarlReport(
-  rawResults: RawResult[]
+  rawResults: RawResult[],
+  url?: string
 ): EarlResult {
+  debugger
   return {
     '@context': context,
     '@type': EarlType.WebPage,
-    url: window.location.href,
+    url: url ? url : window.location.href,
     assertions: axeResultToAssertion(rawResults)
   }
 }

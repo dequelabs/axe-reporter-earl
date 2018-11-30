@@ -69,11 +69,10 @@ test(`TestResult has 'pointer'`, () => {
   eachResult((axeResult, nodeResults) => {
     expect(axeResult.description).toBeDefined()
     const results = testResult(axeResult, nodeResults)
-    const pointers = nodeResults.map(
-      ({ node }) =>
-        Array.isArray(node.selector[0])
-          ? node.selector[0][0]
-          : node.selector[0]
+    const pointers = nodeResults.map(({ node }) =>
+      Array.isArray(node.selector[0])
+        ? node.selector[0][0]
+        : node.selector[0]
     )
     results.forEach(result => {
       expect(pointers).toContain(result['pointer'])
