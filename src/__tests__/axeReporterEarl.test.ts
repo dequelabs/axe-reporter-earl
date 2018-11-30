@@ -88,7 +88,20 @@ describe(`createEarlReport`, () => {
         'earl:subject': [
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -97,17 +110,24 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/foo',
               '@type': 'earl:TestCase'
-            },
-            'http://usefulinc.com/ns/doap#name': 'Axe',
-            'http://usefulinc.com/ns/doap#vendor': {
-              '@id': 'https://deque.com/',
-              '@type': 'http://xmlns.com/foaf/spec/#Organization',
-              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           },
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -122,17 +142,24 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/bar',
               '@type': 'earl:TestCase'
-            },
-            'http://usefulinc.com/ns/doap#name': 'Axe',
-            'http://usefulinc.com/ns/doap#vendor': {
-              '@id': 'https://deque.com/',
-              '@type': 'http://xmlns.com/foaf/spec/#Organization',
-              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           },
           {
             '@type': 'earl:Assertion',
-            'earl:assertedBy': { '@id': 'axe-version:3.1.0' },
+            'earl:assertedBy': {
+              '@id': 'axe-version:3.1.0',
+              '@type': [
+                'earl:Assertor',
+                'earl:Software',
+                'http://usefulinc.com/ns/doap#Project'
+              ],
+              'http://usefulinc.com/ns/doap#name': 'Axe',
+              'http://usefulinc.com/ns/doap#vendor': {
+                '@id': 'https://deque.com/',
+                '@type': 'http://xmlns.com/foaf/spec/#Organization',
+                'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
+              }
+            },
             'earl:mode': { '@id': 'earl:automatic' },
             'earl:result': {
               '@type': 'earl:TestResult',
@@ -146,12 +173,6 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/baz',
               '@type': 'earl:TestCase'
-            },
-            'http://usefulinc.com/ns/doap#name': 'Axe',
-            'http://usefulinc.com/ns/doap#vendor': {
-              '@id': 'https://deque.com/',
-              '@type': 'http://xmlns.com/foaf/spec/#Organization',
-              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           }
         ]
