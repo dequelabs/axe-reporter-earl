@@ -1,7 +1,11 @@
 {
   "doap": "http://usefulinc.com/ns/doap#",
   "doap:name": "Axe",
-  "doap:created": "Deque Systems",
+  "doap:vendor": {
+    "@id": "https://deque.com/",
+    "@type": "foaf:Organization",
+    "foaf:name": "Deque Systems"
+  },
   "@vocab": "http://www.w3.org/ns/earl#",
   "earl": "http://www.w3.org/ns/earl#",
   "WCAG20": "http://www.w3.org/TR/WCAG20/#",
@@ -11,9 +15,19 @@
   "sch": "https://schema.org/",
   "WebPage": "sch:WebPage",
   "url": "dct:source",
-  "assertions": { "@reverse": "subject" },
-  "assertedBy": { "@type": "@id" },
-  "outcome": { "@type": "@id" },
-  "mode": { "@type": "@id" },
-  "pointer": { "@type": "ptr:CSSSelectorPointer" }
+  "assertions": {
+    "@reverse": "subject"
+  },
+  "assertedBy": {
+    "@type": "@id"
+  },
+  "outcome": {
+    "@type": "@id"
+  },
+  "mode": {
+    "@type": "@id"
+  },
+  "pointer": {
+    "@type": "ptr:CSSSelectorPointer"
+  }
 }
