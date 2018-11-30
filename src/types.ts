@@ -20,6 +20,8 @@ type outcome =
 
 export interface Assertion {
   '@type': EarlType.Assertion
+  'doap:name': string
+  'doap:vendor': Object
   mode: 'earl:automatic'
   assertedBy: string
   test: {

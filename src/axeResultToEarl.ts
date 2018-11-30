@@ -32,6 +32,12 @@ export default function axeResultToEarl(
           const version = (match && match[1]) || ''
           return {
             '@type': EarlType.Assertion,
+            'doap:name': 'Axe',
+            'doap:vendor': {
+              '@id': 'https://deque.com/',
+              '@type': 'foaf:Organization',
+              'foaf:name': 'Deque Systems'
+            },
             mode: 'earl:automatic',
             assertedBy: `https://github.com/dequelabs/axe-core/releases/tag/${version}.0`,
             test: {

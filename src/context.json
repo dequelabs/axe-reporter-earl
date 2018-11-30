@@ -1,11 +1,6 @@
 {
   "doap": "http://usefulinc.com/ns/doap#",
-  "doap:name": "Axe",
-  "doap:vendor": {
-    "@id": "https://deque.com/",
-    "@type": "foaf:Organization",
-    "foaf:name": "Deque Systems"
-  },
+  "foaf": "http://xmlns.com/foaf/spec/#",
   "@vocab": "http://www.w3.org/ns/earl#",
   "earl": "http://www.w3.org/ns/earl#",
   "WCAG20": "http://www.w3.org/TR/WCAG20/#",
