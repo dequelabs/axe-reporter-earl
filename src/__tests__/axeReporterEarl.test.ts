@@ -97,6 +97,12 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/foo',
               '@type': 'earl:TestCase'
+            },
+            'http://usefulinc.com/ns/doap#name': 'Axe',
+            'http://usefulinc.com/ns/doap#vendor': {
+              '@id': 'https://deque.com/',
+              '@type': 'http://xmlns.com/foaf/spec/#Organization',
+              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           },
           {
@@ -116,6 +122,12 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/bar',
               '@type': 'earl:TestCase'
+            },
+            'http://usefulinc.com/ns/doap#name': 'Axe',
+            'http://usefulinc.com/ns/doap#vendor': {
+              '@id': 'https://deque.com/',
+              '@type': 'http://xmlns.com/foaf/spec/#Organization',
+              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           },
           {
@@ -134,6 +146,12 @@ describe(`createEarlReport`, () => {
             'earl:test': {
               '@id': 'dqu-page:3.1/baz',
               '@type': 'earl:TestCase'
+            },
+            'http://usefulinc.com/ns/doap#name': 'Axe',
+            'http://usefulinc.com/ns/doap#vendor': {
+              '@id': 'https://deque.com/',
+              '@type': 'http://xmlns.com/foaf/spec/#Organization',
+              'http://xmlns.com/foaf/spec/#name': 'Deque Systems'
             }
           }
         ]
