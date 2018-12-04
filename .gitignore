@@ -1,3 +1,9 @@
+# defaults
+.vscode
 node_modules
-dist
+
+# coverage
 coverage
+
+# dist
+dist/__tests__
