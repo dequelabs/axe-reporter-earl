@@ -1,19 +1,78 @@
 version: 2
 
+defaults: &defaults
+  docker:
+    - image: circleci/node:10-browsers
+  working_directory: ~/axe-reporter-earl
+
 jobs:
-  build:
-    docker:
-      - image: circleci/node:6-browsers
+  dependencies:
+    <<: *defaults
     steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - npm-{{ checksum "package-lock.json" }}
-          - npm
-    - run: npm install
-    - save_cache:
-        key: npm-{{ checksum "package-lock.json" }}
-        paths:
-          - node_modules
-    - run: npm run lint
-    - run: npm run test:unit
+      - checkout
+      - restore_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  unit_tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+      - run: npm run test:unit
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+      - run: npm run lint
+  canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: .circleci/next-release.js
+      - run: npm publish --tag=next
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-npm-cache-{{ checksum "package.json" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: npm publish
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - dependencies
+      - unit_tests:
+          requires:
+            - dependencies
+      - lint:
+          requires:
+            - dependencies
+      - canary_release:
+          requires:
+            - dependencies
+            - unit_tests
+            - lint
+          filters:
+            branches:
+              only: develop
+      - release:
+          requires:
+            - dependencies
+            - unit_tests
+            - lint
+          filters:
+            branches:
+              only: master
