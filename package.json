@@ -10,7 +10,7 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "lint": "tslint --project tsconfig.json --format codeFrame 'src/**/*.ts'",
-    "fmt": "prettier --write *.{md,js,json} 'src/**/*.ts'"
+    "fmt": "prettier --write *.{md,js,json} 'src/**/*.ts' './.circleci/*.js'"
   },
   "coverageReporters": [
     "clover"
