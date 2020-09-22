@@ -1,4 +1,10 @@
-# Axe Reporter EARL
+# [DEPRECATED] Axe Reporter EARL
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> This repository has been deprecated. The package has been moved to  [axe-core-npm](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/reporter-earl). The package will be available via NPM as [`@axe-core/reporter-earl`](https://www.npmjs.com/package/@axe-core/reporter-earl).
+
+---
 
 This project is a reporter for [axe-core](https://github.com/dequelabs/axe-core). When used as part of an axe-core run, it will produce results using the [Evaluation And Reporting Language (EARL) 1.0](https://www.w3.org/TR/EARL10-Schema/). The reporter uses [JSON-LD](https://json-ld.org/spec/latest/json-ld/) to serialise the RDF data.
 
