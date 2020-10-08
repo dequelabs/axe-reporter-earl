@@ -5,12 +5,12 @@
   "main": "dist/axeReporterEarl.js",
   "scripts": {
     "start": "jest --watch --env=jsdom",
-    "test": "npm run lint && npm run test:unit",
+    "test": "npm run build && npm run lint && npm run test:unit",
     "test:unit": "jest --collectCoverage",
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "lint": "tslint --project tsconfig.json --format codeFrame 'src/**/*.ts'",
-    "fmt": "prettier --write *.{md,js,json} 'src/**/*.ts'"
+    "fmt": "prettier --write *.{md,js,json} 'src/**/*.ts' './.circleci/*.js'"
   },
   "coverageReporters": [
     "clover"
@@ -25,12 +25,11 @@
   "author": "Wilco Fiers",
   "license": "MPL-2.0",
   "devDependencies": {
-    "@types/chai": "^4.1.6",
     "@types/clone": "^0.1.30",
-    "@types/jest": "^23.3.5",
+    "@types/jest": "^23.3.9",
+    "@types/jsonld": "github:types/jsonld",
     "@types/node": "^10.12.0",
-    "axe-core": "^3.1.2",
-    "chai": "^4.2.0",
+    "axe-core": "^3.1.2-canary.e67fc65",
     "clone": "^2.1.2",
     "husky": "^1.0.0",
     "jest": "^23.6.0",
@@ -42,16 +41,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.0.3"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 70,
-    "bracketSpacing": true,
-    "useTabs": false,
-    "trailingComma": "none",
-    "arrowParens": "avoid"
+    "typescript": "^3.1.6"
   },
   "lint-staged": {
     "*.{md,js,json}": [

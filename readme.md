@@ -1,4 +1,10 @@
-# Axe Reporter EARL
+# [DEPRECATED] Axe Reporter EARL
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> This repository has been deprecated. The package has been moved to  [axe-core-npm](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/reporter-earl). The package will be available via NPM as [`@axe-core/reporter-earl`](https://www.npmjs.com/package/@axe-core/reporter-earl).
+
+---
 
 This project is a reporter for [axe-core](https://github.com/dequelabs/axe-core). When used as part of an axe-core run, it will produce results using the [Evaluation And Reporting Language (EARL) 1.0](https://www.w3.org/TR/EARL10-Schema/). The reporter uses [JSON-LD](https://json-ld.org/spec/latest/json-ld/) to serialise the RDF data.
 
@@ -41,6 +47,8 @@ The repoter format should look something like this:
     "auto-wcag": "https://auto-wcag.github.io/auto-wcag/rules/",
     "dct": "http://purl.org/dc/terms#",
     "sch": "https://schema.org/",
+    "doap": "http://usefulinc.com/ns/doap#",
+    "foaf": "http://xmlns.com/foaf/spec/#",
     "WebPage": "sch:WebPage",
     "url": "dct:source",
     "assertions": {
@@ -63,7 +71,16 @@ The repoter format should look something like this:
   "url": "http://localhost/",
   "assertions": [
     {
-      "assertedBy": "https://github.com/dequelabs/axe-core/releases/tag/3.1.0",
+      "assertedBy": {
+        "@id": "https://github.com/dequelabs/axe-core/releases/tag/3.1.2",
+        "@type": ["earl:Assertor", "earl:Software", "doap:Project"],
+        "doap:name": "Axe",
+        "doap:vendor": {
+          "@id": "https://deque.com/",
+          "@type": "foaf:Organization",
+          "foaf:name": "Deque Systems"
+        }
+      },
       "test": {
         "@type": "TestCase",
         "@id": "https://dequeuniversity.com/rules/axe/3.1/foo"
@@ -76,7 +93,16 @@ The repoter format should look something like this:
       "mode": "earl:automatic"
     },
     {
-      "assertedBy": "https://github.com/dequelabs/axe-core/releases/tag/3.1.0",
+      "assertedBy": {
+        "@id": "https://github.com/dequelabs/axe-core/releases/tag/3.1.2",
+        "@type": ["earl:Assertor", "earl:Software", "doap:Project"],
+        "doap:name": "Axe",
+        "doap:vendor": {
+          "@id": "https://deque.com/",
+          "@type": "foaf:Organization",
+          "foaf:name": "Deque Systems"
+        }
+      },
       "test": {
         "@type": "TestCase",
         "@id": "https://dequeuniversity.com/rules/axe/3.1/bar"
@@ -84,21 +110,6 @@ The repoter format should look something like this:
       "result": {
         "@type": "TestResult",
         "info": "Ensures role attribute has an appropriate value for the element",
-        "outcome": "earl:undefined",
-        "pointer": "#foo"
-      },
-      "@type": "Assertion",
-      "mode": "earl:automatic"
-    },
-    {
-      "assertedBy": "https://github.com/dequelabs/axe-core/releases/tag/3.1.0",
-      "test": {
-        "@type": "TestCase",
-        "@id": "https://dequeuniversity.com/rules/axe/3.1/baz"
-      },
-      "result": {
-        "@type": "TestResult",
-        "info": "Ensures baz",
         "outcome": "earl:undefined",
         "pointer": "#foo"
       },
